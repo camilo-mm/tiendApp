@@ -2,7 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import {useFonts} from 'expo-font'
 import {AppLoading} from 'expo-app-loading'
+import { NavigationContainer } from '@react-navigation/native';
 import ShopNavigator from './navigation/ShopNavigator'
+import TabNavigator from './navigation/TabNavigator'
 
 export default function App() {
   const [loaded] = useFonts({
@@ -14,7 +16,9 @@ export default function App() {
   } 
   
   return (
-    <ShopNavigator />
+    <NavigationContainer>
+      <TabNavigator />
+    </NavigationContainer>
   );
 }
 
