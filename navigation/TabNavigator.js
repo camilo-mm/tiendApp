@@ -6,6 +6,7 @@ import { Entypo } from '@expo/vector-icons';
 
 import ShopNavigator from './ShopNavigator'
 import CartNavigator from './CartNavigator'
+import OrdersNavigator from './OrdersNavigator';
 
 const BottomTabs = createBottomTabNavigator()
 
@@ -36,6 +37,17 @@ const TabNavigator = () => (
                     focused ? 
                     <Entypo name="shopping-cart" size={24} color="black" /> :
                     <AntDesign name="shoppingcart" size={24} color="black"  /> 
+                  ),
+            }}
+        />
+        <BottomTabs.Screen
+            name="OrdersTab"
+            component={OrdersNavigator}
+            options={{
+                tabBarIcon: ({focused}) => (
+                    focused ? 
+                    <Entypo name="folder" size={24} color="black" /> :
+                    <AntDesign name="folder1" size={24} color="black" />
                   ),
             }}
         />
