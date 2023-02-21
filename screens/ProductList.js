@@ -1,29 +1,35 @@
-import React from 'react'
-import { StyleSheet, Text, View, Button } from 'react-native';
+import React, {useEffect} from 'react'
+import { FlatList, StyleSheet } from 'react-native';
 
-export default function ProductList ({navigation}){
+import ProductListItem from '../components/ProductListItem';
+import { useSelector, useDispatch } from 'react-redux';
+import { filteredProduct, selectedProduct } from '../store/actions/products.action';
+
+export default function ProductList ({navigation, route}){
+    const dispatch = useDispatch()
+    const categoryProducts = useSelector(state => state.products.filteredProducts)
+    const category = useSelector(state => state.categories.selected)
+
+    useEffect(() => {
+        dispatch(filteredProduct(category.id))
+      }, [])
+
+    const handleSelected = (item) =>{
+        dispatch(selectedProduct(item.id))
+        navigation.navigate('Detail', {
+            name: item.name
+        })
+    }
+
+    const renderItem = ({ item }) => (
+        <ProductListItem item={item} onSelected={handleSelected} />
+    )
+
     return(
-        <View style={styles.container}>
-            <Text style={styles.title}>Pantalla de listado de productos</Text>
-            <Button title="Ir al home" onPress={() =>{
-                navigation.navigate("Home")
-            }} />
-            <Button title="Ver detalle de producto" onPress={()=>{
-                navigation.navigate('Detail')
-            }} />
-        </View>
+        <FlatList
+            data={categoryProducts}
+            keyExtractor={item => item.id}
+            renderItem={renderItem}
+        />
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    title:{
-        fontSize: 30,
-        fontFamily: 'pacifico'
-    },
-})

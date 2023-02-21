@@ -1,16 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native';
+import { useSelector } from 'react-redux';
 
-const ProductDetail = ({navigation}) =>{
+const ProductDetail = ({route}) =>{
+    const product = useSelector(state => state.products.selected)
     return(
         <View style={styles.container}>
-            <Text style={styles.title}>Pantalla detalle de producto</Text>
-            <Button title="Ir al home" onPress={() =>{
-                navigation.navigate("Home")
-            }} />
-            <Button title="Ir al Listado de productos" onPress={() =>{
-                navigation.navigate("Categorys")
-            }} />
+            <Text style={styles.title}>{product.name}</Text>
+            <Text style={styles.description}>{product.description}</Text>
+            <Text style={styles.price}>${product.price}</Text>
         </View>
     )
 }
@@ -23,9 +21,16 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: 20,
     },
     title:{
         fontSize: 30,
         fontFamily: 'pacifico'
+    },
+    description:{
+        fontSize: 20,
+    },
+    price:{
+        fontSize: 20,
     },
 })

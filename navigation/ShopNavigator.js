@@ -9,9 +9,27 @@ const Stack = createNativeStackNavigator();
 
 const ShopNavigator = () => (
         <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" component={CategoryList} />
-            <Stack.Screen name="Categorys" component={ProductList} />
-            <Stack.Screen name="Detail" component={ProductDetail} />
+            <Stack.Screen 
+                name="Home" 
+                component={CategoryList}
+                options={{
+                    title: "Tienda online"
+                }}
+                />
+            <Stack.Screen 
+                name="Products" 
+                component={ProductList} 
+                options={({ route })=> ({
+                    title: route.params.name
+                })}
+            />
+            <Stack.Screen 
+                name="Detail" 
+                component={ProductDetail}
+                options={({ route }) => ({
+                    title: route.params.name
+                })}
+            />
         </Stack.Navigator>
 )
 
