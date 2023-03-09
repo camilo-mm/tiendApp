@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import GridItem from '../components/GridItem';
 import { selectCategory } from '../store/actions/category.action';
+import ImageSelector from '../components/ImageSelector';
 
 
 export default function CategoryList({navigation}){
@@ -22,23 +23,26 @@ export default function CategoryList({navigation}){
     )
 
     return(
+        <>
+        <ImageSelector onImage={image => console.log(image)} />
         <FlatList
             data={categories}
             keyExtractor={item => item.id}
             renderItem={renderGridItem}
         />
+        </>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#000',
         alignItems: 'center',
         justifyContent: 'center',
     },
     title:{
         fontSize: 30,
         fontFamily: 'pacifico'
-    },
+    }
 })
