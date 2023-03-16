@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { AntDesign } from '@expo/vector-icons'; 
+import { insertImage } from '../db';
+
 
 const ImageSelector = props => {
   const [pickedUri, setPickedUri] = useState()

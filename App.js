@@ -5,6 +5,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import TabNavigator from './navigation/TabNavigator'
 import { Provider } from 'react-redux';
 import store from './store';
+import { init } from './db';
+
+
+init()
+  .then(()=> console.log('database initialized'))
+  .catch((err) => {
+    console.log('database fail connect')
+    console.log(err.message)
+  })
 
 export default function App() {
   const [loaded] = useFonts({
